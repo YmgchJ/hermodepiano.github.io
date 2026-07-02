@@ -13,7 +13,9 @@
             --card-bg: #FFFFFF;
             --text-main: #1D1D1F;
             --text-muted: #515154;
+            --text-light: #86868B;
             --border-color: #E5E5EA;
+            --badge-bg: #F0F0F5;
         }
 
         * {
@@ -31,12 +33,12 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 860px;
             margin: 40px auto;
             padding: 40px;
             background-color: var(--card-bg);
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.06);
         }
 
         .header {
@@ -45,57 +47,34 @@
         }
 
         h1 {
-            font-size: 28px;
+            font-size: 32px;
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             color: var(--text-main);
+            letter-spacing: -0.5px;
         }
 
         p.desc {
             color: var(--text-muted);
-            font-size: 15px;
+            font-size: 16px;
             margin-bottom: 25px;
-        }
-
-        .placeholder-box {
-            border: 2px dashed var(--border-color);
-            border-radius: 12px;
-            padding: 60px 20px;
-            text-align: center;
-            color: var(--text-muted);
-            background-color: #FAFAFC;
-        }
-
-        .back-link {
-            display: inline-block;
-            margin-top: 30px;
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 14px;
-            transition: color 0.2s;
-            text-align: center;
-            width: 100%;
-        }
-
-        .back-link:hover {
-            color: var(--primary-color);
         }
 
         .lang-toggle {
             display: inline-flex;
             background: var(--bg-color);
             padding: 4px;
-            border-radius: 8px;
-            margin-top: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
         }
 
         .lang-btn {
             background: transparent;
             border: none;
-            padding: 8px 16px;
-            border-radius: 6px;
+            padding: 8px 18px;
+            border-radius: 8px;
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 600;
             cursor: pointer;
             color: var(--text-muted);
             transition: all 0.2s ease;
@@ -120,15 +99,127 @@
             display: inline;
         }
 
+        li.lang-content.active {
+            display: list-item;
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(5px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Manual Content Styles */
+        .manual-section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .manual-section:last-child {
+            border-bottom: none;
+            margin-bottom: 10px;
+            padding-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title .step-number {
+            background: var(--primary-color);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .feature-item {
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+
+        .feature-desc {
+            font-size: 15px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .nested-list {
+            list-style-type: disc;
+            margin-left: 24px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .nested-list li {
+            margin-bottom: 6px;
+            font-size: 15px;
+            color: var(--text-muted);
+        }
+
+        .nested-list li strong {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .grid-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 10px;
+            margin-top: 12px;
+            margin-bottom: 12px;
+        }
+
+        .grid-item {
+            background: var(--badge-bg);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            color: var(--text-main);
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 40px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.2s;
+            text-align: center;
+            width: 100%;
+        }
+
+        .back-link:hover {
+            color: var(--primary-color);
+        }
+
         @media (max-width: 600px) {
             .container {
-                margin: 20px;
+                margin: 15px;
                 padding: 25px;
+            }
+            .section-title {
+                font-size: 19px;
             }
         }
     </style>
@@ -143,14 +234,434 @@
                 <button class="lang-btn active" onclick="setLang('en')" id="btn-en">English</button>
             </div>
             
-            <p id="desc-en" class="desc lang-content active">How to use Hermode Piano.</p>
-            <p id="desc-ja" class="desc lang-content">Hermode Pianoの使い方</p>
+            <p id="desc-en" class="desc lang-content active">Comprehensive guide to all features and settings in Hermode Piano.</p>
+            <p id="desc-ja" class="desc lang-content">Hermode Pianoのすべての機能と詳細な設定項目を解説する完全マニュアルです。</p>
         </div>
 
-        <div class="placeholder-box">
-            <p id="placeholder-en" class="lang-content active">Please add the user manual content here.</p>
-            <p id="placeholder-ja" class="lang-content">ここに取扱説明書の内容を追加してください。</p>
-        </div>
+        <div class="manual-content">
+
+            <!-- Section 1 -->
+            <div class="manual-section">
+                <div class="section-title">
+                    <div class="step-number">1</div>
+                    <span id="s1-en" class="lang-content active">Screen Layout & Basic Operations</span>
+                    <span id="s1-ja" class="lang-content">画面のレイアウトと基本操作</span>
+                </div>
+                
+                <div class="feature-item lang-content active" id="s1-1-en">
+                    <div class="feature-title">Three Screen Modes</div>
+                    <div class="feature-desc">
+                        The app provides three distinct layouts to suit your playing style. You can seamlessly transition between them by swiping up or down on the top half of the screen (the non-keyboard area):
+                        <ul class="nested-list">
+                            <li><strong>Chord View:</strong> Displays the currently detected chord name and its component notes in a large, easy-to-read font.</li>
+                            <li><strong>Split Keyboard:</strong> The standard mode with controls and settings on top, and the keyboard on the bottom.</li>
+                            <li><strong>Full-screen Keyboard:</strong> Hides all controls to maximize the screen area dedicated to the keys. Perfect for performance.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="feature-item lang-content" id="s1-1-ja">
+                    <div class="feature-title">3つの画面モード</div>
+                    <div class="feature-desc">
+                        用途に合わせて3種類の画面レイアウトを使い分けることができます。画面の上半分（鍵盤以外の領域）を上下にスワイプするだけで、シームレスに切り替わります。
+                        <ul class="nested-list">
+                            <li><strong>コード表示モード:</strong> 現在押さえている和音（コード）の名前とその構成音を、画面上部に大きく表示するモードです。</li>
+                            <li><strong>分割鍵盤モード:</strong> 上部に操作パネルや設定、下部に鍵盤を配置する標準的なモードです。</li>
+                            <li><strong>鍵盤全画面モード:</strong> コントロール類をすべて隠し、画面全体を鍵盤にするモードです。演奏に集中したい場合に最適です。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="feature-item lang-content active" id="s1-2-en">
+                    <div class="feature-title">Quick Hide/Show</div>
+                    <div class="feature-desc">
+                        Double-tap the top half of the screen to instantly hide or show the keyboard. If you are in full-screen mode, you can return to the previous mode by swiping down from the very top edge of the screen or tapping the '✕' button.
+                    </div>
+                </div>
+                <div class="feature-item lang-content" id="s1-2-ja">
+                    <div class="feature-title">素早い表示切り替え</div>
+                    <div class="feature-desc">
+                        画面上半分を素早く2回タップ（ダブルタップ）することで、鍵盤を瞬時に隠す／表示させることができます。また、全画面モードから元の画面に戻る場合は、画面の最上部から下に向かってスワイプするか、右上の「✕」ボタンをタップします。
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2 -->
+            <div class="manual-section">
+                <div class="section-title">
+                    <div class="step-number">2</div>
+                    <span id="s2-en" class="lang-content active">Keyboard Controls & Settings</span>
+                    <span id="s2-ja" class="lang-content">鍵盤の操作と詳細設定</span>
+                </div>
+
+                <div class="feature-item lang-content active" id="s2-1-en">
+                    <div class="feature-title">Scrolling the Keyboard</div>
+                    <div class="feature-desc">Drag the horizontal slider located directly above the keys to smoothly scroll left or right across the octaves.</div>
+                </div>
+                <div class="feature-item lang-content" id="s2-1-ja">
+                    <div class="feature-title">スクロール操作</div>
+                    <div class="feature-desc">鍵盤のすぐ上にあるスライダーを左右にドラッグすることで、表示するオクターブ帯を滑らかに移動できます。</div>
+                </div>
+
+                <div class="feature-item lang-content active" id="s2-2-en">
+                    <div class="feature-title">Damper Pedal</div>
+                    <div class="feature-desc">When the 'Piano' instrument is selected, a waveform icon appears on the left side of the control bar. Tapping this pedal adds natural acoustic resonance and sustains your notes even after you lift your fingers, replicating the right pedal of an acoustic piano.</div>
+                </div>
+                <div class="feature-item lang-content" id="s2-2-ja">
+                    <div class="feature-title">ダンパーペダル</div>
+                    <div class="feature-desc">「ピアノ」音色を選択している時のみ、コントロールバー左側に波形のアイコンが表示されます。これをタップして有効（色がつく状態）にすると、指を離しても音が長く響くようになり、アコースティックピアノの右ペダルと全く同じ効果が得られます。</div>
+                </div>
+
+                <div class="feature-item lang-content active" id="s2-3-en">
+                    <div class="feature-title">Keyboard Settings (Gear Icon)</div>
+                    <div class="feature-desc">
+                        Tap the gear icon on the control bar to open the dedicated keyboard settings panel:
+                        <ul class="nested-list">
+                            <li><strong>Zoom:</strong> Use the <code>−</code> and <code>+</code> buttons to widen or narrow the keys to your preferred size.</li>
+                            <li><strong>Label:</strong> Toggle the display of note names directly on the white keys.</li>
+                            <li><strong>Notation Styles:</strong> Choose from 8 different naming systems. This immediately updates how every key is labeled:</li>
+                        </ul>
+                        <div class="grid-list">
+                            <div class="grid-item">English (C D E)</div>
+                            <div class="grid-item">Deutsch (C D E … H)</div>
+                            <div class="grid-item">Solfège (Do Re Mi)</div>
+                            <div class="grid-item">Français (Do Ré Mi)</div>
+                            <div class="grid-item">Português (Dó Ré Mi)</div>
+                            <div class="grid-item">Japanese (ハ ニ ホ)</div>
+                            <div class="grid-item">Sargam (Sa Re Ga)</div>
+                            <div class="grid-item">Chinese (上 尺 工)</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="feature-item lang-content" id="s2-3-ja">
+                    <div class="feature-title">鍵盤の詳細設定（歯車アイコン）</div>
+                    <div class="feature-desc">
+                        コントロールバーの歯車アイコンをタップすると、鍵盤専用の設定パネルが開きます。
+                        <ul class="nested-list">
+                            <li><strong>ズーム:</strong> 「−」と「＋」ボタンを使って、鍵盤の幅（太さ）を自分好みのサイズに微調整できます。</li>
+                            <li><strong>音名表示:</strong> 鍵盤上に音名（C, D, E等）を印字するかどうかをスイッチで切り替えます。</li>
+                            <li><strong>音名表記のスタイル:</strong> 音名の読み方を以下の8種類から選択可能です。設定に応じて全ての鍵盤の印字が即座に切り替わります。</li>
+                        </ul>
+                        <div class="grid-list">
+                            <div class="grid-item">英語 (C D E)</div>
+                            <div class="grid-item">ドイツ語 (C D E … H)</div>
+                            <div class="grid-item">ソルフェージュ (Do Re Mi)</div>
+                            <div class="grid-item">フランス語 (Do Ré Mi)</div>
+                            <div class="grid-item">ポルトガル語 (Dó Ré Mi)</div>
+                            <div class="grid-item">日本音名 (ハ ニ ホ)</div>
+                            <div class="grid-item">インド音名 (Sa Re Ga)</div>
+                            <div class="grid-item">中国音名 (上 尺 工)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3 -->
+            <div class="manual-section">
+                <div class="section-title">
+                    <div class="step-number">3</div>
+                    <span id="s3-en" class="lang-content active">Tuning Systems & Sound</span>
+                    <span id="s3-ja" class="lang-content">調律システムとサウンド設定</span>
+                </div>
+
+                <div class="feature-item lang-content active" id="s3-1-en">
+                    <div class="feature-title">Instruments</div>
+                    <div class="feature-desc">
+                        Select from 11 meticulously tuned sound sources:
+                        <div class="grid-list">
+                            <div class="grid-item">Piano</div>
+                            <div class="grid-item">Sine (Pure Tone)</div>
+                            <div class="grid-item">Organ</div>
+                            <div class="grid-item">Clarinet</div>
+                            <div class="grid-item">Oboe</div>
+                            <div class="grid-item">Flute</div>
+                            <div class="grid-item">Violin</div>
+                            <div class="grid-item">Cello</div>
+                            <div class="grid-item">Trumpet</div>
+                            <div class="grid-item">Horn</div>
+                            <div class="grid-item">Trombone</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="feature-item lang-content" id="s3-1-ja">
+                    <div class="feature-title">音色 (Instruments)</div>
+                    <div class="feature-desc">
+                        以下の11種類から好みの音色を選択できます。
+                        <div class="grid-list">
+                            <div class="grid-item">Piano（ピアノ）</div>
+                            <div class="grid-item">Sine（サイン波）</div>
+                            <div class="grid-item">Organ（オルガン）</div>
+                            <div class="grid-item">Clarinet（クラリネット）</div>
+                            <div class="grid-item">Oboe（オーボエ）</div>
+                            <div class="grid-item">Flute（フルート）</div>
+                            <div class="grid-item">Violin（バイオリン）</div>
+                            <div class="grid-item">Cello（チェロ）</div>
+                            <div class="grid-item">Trumpet（トランペット）</div>
+                            <div class="grid-item">Horn（ホルン）</div>
+                            <div class="grid-item">Trombone（トロンボーン）</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-item lang-content active" id="s3-2-en">
+                    <div class="feature-title">Transpose</div>
+                    <div class="feature-desc">Shift the pitch of the entire keyboard from -12 semitones (one octave down) to +12 semitones (one octave up).</div>
+                </div>
+                <div class="feature-item lang-content" id="s3-2-ja">
+                    <div class="feature-title">移調 (Transpose)</div>
+                    <div class="feature-desc">-12半音（1オクターブ下）から +12半音（1オクターブ上）まで、半音単位でキー全体をシフトできます。</div>
+                </div>
+
+                <div class="feature-item lang-content active" id="s3-3-en">
+                    <div class="feature-title">Tuning Selection (Equal vs Just)</div>
+                    <div class="feature-desc">
+                        <ul class="nested-list">
+                            <li><strong>Equal Temperament:</strong> The standard tuning used on modern pianos. It sounds equally in tune across all keys, but the intervals are slightly compromised.</li>
+                            <li><strong>Just Intonation (Major/Minor):</strong> The defining feature of Hermode Piano. When you play a chord, the app instantly detects its root note and perfectly calculates the mathematical frequency ratios for every note. This creates a purely harmonious, beating-free sound. You can manually toggle between Major and Minor pure intonation based on the context of your song.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="feature-item lang-content" id="s3-3-ja">
+                    <div class="feature-title">調律の切り替え (平均律 / 純正律)</div>
+                    <div class="feature-desc">
+                        <ul class="nested-list">
+                            <li><strong>平均律 (Equal):</strong> 現代の一般的なピアノと同じ、どの調でも均等に響く調律です。ただし、和音の響きにはわずかな濁り（うなり）が生じます。</li>
+                            <li><strong>純正律 (Just - 長調/短調):</strong> 和音が最も美しくハモる調律です。このアプリ最大の特徴であり、押さえている鍵盤から和音（コード）をリアルタイムに自動解析し、その主音に対して最も美しく響く純正な周波数比を瞬時に計算・適用します。演奏する曲に合わせて、長調（Major）と短調（Minor）を手動で切り替えることができます。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="feature-item lang-content active" id="s3-4-en">
+                    <div class="feature-title">Sustain Latch</div>
+                    <div class="feature-desc">Tap the 'Sustain' button in the chord view to act as a latch. Any keys you press will hold infinitely even after you release your fingers. The sustained keys will remain highlighted. To stop a specific note, simply tap that individual key again to release it. This is incredibly useful for analyzing chord structures and listening to pure intonation without holding your hands on the screen.</div>
+                </div>
+                <div class="feature-item lang-content" id="s3-4-ja">
+                    <div class="feature-title">持続機能 (Sustain Latch)</div>
+                    <div class="feature-desc">コード表示領域にある「持続」ボタンをタップすると、ラッチ（ロック）モードになります。弾いた音が指を離しても永遠に鳴り続け、鍵盤もハイライトされたままになります。鳴っている特定の鍵盤をもう一度タップすると、その音だけが個別に解除されます。和音の響きをじっくり確認したい時や、両手を離して純正律の美しさを聴き込みたい時に非常に便利です。</div>
+                </div>
+            </div>
+
+            <!-- Section 4 -->
+            <div class="manual-section">
+                <div class="section-title">
+                    <div class="step-number">4</div>
+                    <span id="s4-en" class="lang-content active">Advanced Metronome</span>
+                    <span id="s4-ja" class="lang-content">高機能メトロノーム</span>
+                </div>
+
+                <div class="feature-item lang-content active" id="s4-1-en">
+                    <div class="feature-title">Tempo Controls</div>
+                    <div class="feature-desc">
+                        <ul class="nested-list">
+                            <li><strong>Numpad:</strong> Tap the BPM number to open a numpad for exact data entry.</li>
+                            <li><strong>Fine Tuning:</strong> Tap or hold the <code>−</code> and <code>+</code> buttons to smoothly decrease or increase the BPM.</li>
+                            <li><strong>Tap Tempo:</strong> Tap the large circular area in the center in time with your desired rhythm, and the app will automatically calculate and set the BPM.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="feature-item lang-content" id="s4-1-ja">
+                    <div class="feature-title">テンポの指定 (Tempo Controls)</div>
+                    <div class="feature-desc">
+                        <ul class="nested-list">
+                            <li><strong>数値指定:</strong> BPMの数字をタップするとテンキーが開き、直接テンポを入力できます。</li>
+                            <li><strong>微調整:</strong> 左右の「−」「＋」ボタンをタップ、または長押しすることで連続して滑らかにBPMが増減します。</li>
+                            <li><strong>タップテンポ:</strong> 画面中央の円形部分をリズムに合わせて数回タップするだけで、その間隔からBPMを自動計算して設定します。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="feature-item lang-content active" id="s4-2-en">
+                    <div class="feature-title">Time Signature & Transport</div>
+                    <div class="feature-desc">
+                        <ul class="nested-list">
+                            <li><strong>Time Signature:</strong> Combine the numerator (1 to 16 beats) and denominator (2, 4, 8, 16) to create any custom meter.</li>
+                            <li><strong>Count-In:</strong> Enable count-in to play an empty measure of preparatory clicks before the main counter starts.</li>
+                            <li><strong>Auto Stop:</strong> Set a specific number of bars. The metronome will automatically stop once it reaches that duration.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="feature-item lang-content" id="s4-2-ja">
+                    <div class="feature-title">拍子とトランスポート (Time Signature)</div>
+                    <div class="feature-desc">
+                        <ul class="nested-list">
+                            <li><strong>拍子設定:</strong> 分子（1〜16拍）と分母（2, 4, 8, 16音符）を自由に組み合わせて、あらゆる拍子を設定できます。</li>
+                            <li><strong>カウントイン (Count-In):</strong> 有効にすると、演奏開始前に指定した拍子分の予備拍を鳴らすことができます。</li>
+                            <li><strong>自動停止 (Auto Stop):</strong> 指定した小節数（Bars）に達すると、自動的にメトロノームを停止させます。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="feature-item lang-content active" id="s4-3-en">
+                    <div class="feature-title">Subdivision Mixer</div>
+                    <div class="feature-desc">
+                        The metronome features a powerful 6-track mixer. You can independently adjust the volume slider for each subdivision, or tap the speaker icon below the slider to quickly mute it.
+                        <ul class="nested-list">
+                            <li><strong>Accent:</strong> Volume of the first beat of the bar.</li>
+                            <li><strong>Quarter, Eighth, 16th:</strong> Standard subdivisions.</li>
+                            <li><strong>Triplet:</strong> 3-note groupings.</li>
+                            <li><strong>n-tuplet:</strong> A highly customizable track where you can set 'n' from 2 up to 16. It also supports spanning tuplets over two beats (e.g., a half-note triplet).</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="feature-item lang-content" id="s4-3-ja">
+                    <div class="feature-title">ミキサーと連符 (Subdivision Mixer)</div>
+                    <div class="feature-desc">
+                        各音符のボリュームを独立して調整できる強力な6トラックのミキサーを搭載しています。スライダー下のスピーカーアイコンをタップすると瞬時にミュート（消音）できます。
+                        <ul class="nested-list">
+                            <li><strong>Accent (アクセント):</strong> 小節の頭（1拍目）の音量。</li>
+                            <li><strong>4分音符, 8分音符, 16分音符:</strong> 標準的なリズム分割です。</li>
+                            <li><strong>Triplet (3連符):</strong> 1拍を3等分するリズムです。</li>
+                            <li><strong>n-tuplet (任意の連符):</strong> 2連符から16連符まで自由に設定でき、さらに「2拍にまたがる連符（例: 2拍3連など）」の設定もサポートしています。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="feature-item lang-content active" id="s4-4-en">
+                    <div class="feature-title">Sound & Visual Options</div>
+                    <div class="feature-desc">
+                        <ul class="nested-list">
+                            <li><strong>Click Tones:</strong> Tap the settings icon in the metronome to change the actual sound of each mixer track. Options include High, Mid, Low, Tap, Tick, and Bell.</li>
+                            <li><strong>Visible / Audible:</strong> You can choose to have the metronome emit sound (Audible), display a flashing visual ring on the screen edge (Visible), or both simultaneously.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="feature-item lang-content" id="s4-4-ja">
+                    <div class="feature-title">サウンド設定と視覚効果 (Sound & Visual)</div>
+                    <div class="feature-desc">
+                        <ul class="nested-list">
+                            <li><strong>クリック音色:</strong> メトロノーム内の設定アイコンをタップすると、各トラックのクリック音を個別に変更できます。選択肢には High, Mid, Low, Tap, Tick, Bell が用意されています。</li>
+                            <li><strong>視覚・聴覚の切り替え:</strong> クリック音を鳴らす（Audible）か、画面の端を光らせて視覚的にテンポを知らせる（Visible）か、あるいはその両方を同時に有効にするかを選択できます。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 5 -->
+            <div class="manual-section">
+                <div class="section-title">
+                    <div class="step-number">5</div>
+                    <span id="s5-en" class="lang-content active">Chord Recognition & Notation</span>
+                    <span id="s5-ja" class="lang-content">コード判定と表記設定</span>
+                </div>
+
+                <div class="feature-item lang-content active" id="s5-1-en">
+                    <div class="feature-title">Dynamic Detection</div>
+                    <div class="feature-desc">As you press keys (or hold them via Sustain), the app instantaneously analyzes the combination of notes to determine the chord structure (e.g., Cmaj7, Dm9, Gsus4).</div>
+                </div>
+                <div class="feature-item lang-content" id="s5-1-ja">
+                    <div class="feature-title">リアルタイムコード判定</div>
+                    <div class="feature-desc">鍵盤を押さえる（または持続機能で保持する）と、アプリが瞬時に音の組み合わせを解析し、「Cmaj7」「Dm9」「Gsus4」などのコード名として判定・表示します。</div>
+                </div>
+
+                <div class="feature-item lang-content active" id="s5-2-en">
+                    <div class="feature-title">Chord Notation Customization</div>
+                    <div class="feature-desc">
+                        Navigate to the main App Settings (via the side menu or top gear icon when available) to change how chords are displayed:
+                        <ul class="nested-list">
+                            <li><strong>Accidental Preference:</strong> Instruct the app to prioritize Sharp (♯) or Flat (♭) nomenclature for the root notes.</li>
+                            <li><strong>Root Note Language:</strong> Choose the language used for the root letter of the chord. You can independently set this to English (C), German (C or H), or Solfège (Do).</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="feature-item lang-content" id="s5-2-ja">
+                    <div class="feature-title">コード表記のカスタマイズ</div>
+                    <div class="feature-desc">
+                        アプリ全体のメイン設定（Settings）画面から、コードネームの表示方法を柔軟に変更できます。
+                        <ul class="nested-list">
+                            <li><strong>変化記号 (Accidental):</strong> 黒鍵のルート音を表示する際、シャープ（♯）を優先するか、フラット（♭）を優先するかを選択します。</li>
+                            <li><strong>主音の言語 (Root Note Language):</strong> コードネームの頭文字（ルート）を「英語 (C)」「ドイツ語 (C/H)」「ソルフェージュ (Do)」のどれで表記するかを設定できます。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 6 -->
+            <div class="manual-section">
+                <div class="section-title">
+                    <div class="step-number">6</div>
+                    <span id="s6-en" class="lang-content active">MIDI & Global App Settings</span>
+                    <span id="s6-ja" class="lang-content">MIDI連携とアプリ全体の設定</span>
+                </div>
+
+                <div class="feature-item lang-content active" id="s6-1-en">
+                    <div class="feature-title">External MIDI Keyboards</div>
+                    <div class="feature-desc">Hermode Piano fully supports external MIDI controllers via Bluetooth or cable. Playing your physical keyboard perfectly triggers the in-app sound engine, the dynamic chord detection, and the Just Intonation tuning algorithms. Active devices are listed in Settings ▸ MIDI.</div>
+                </div>
+                <div class="feature-item lang-content" id="s6-1-ja">
+                    <div class="feature-title">MIDIキーボード連携</div>
+                    <div class="feature-desc">Bluetoothやケーブルを介して外部のMIDIキーボードを接続できます。外部鍵盤を弾くと、自動的にアプリ内の音源が鳴り、純正律の計算やコード判定機能が完璧に連動して動作します。接続中のデバイス一覧は「Settings ▸ MIDI」項目から確認できます。</div>
+                </div>
+
+                <div class="feature-item lang-content active" id="s6-2-en">
+                    <div class="feature-title">Reference Pitch</div>
+                    <div class="feature-desc">
+                        Tune the master frequency of the app anywhere between 390 Hz and 470 Hz (in 1 Hz increments) using the stepper or slider. For convenience, 12 presets are available:
+                        <div class="grid-list">
+                            <div class="grid-item">A=392 Hz</div>
+                            <div class="grid-item">A=415 Hz</div>
+                            <div class="grid-item">A=430 Hz</div>
+                            <div class="grid-item">A=432 Hz</div>
+                            <div class="grid-item">A=438 Hz</div>
+                            <div class="grid-item">A=440 Hz (Standard)</div>
+                            <div class="grid-item">A=441 Hz</div>
+                            <div class="grid-item">A=442 Hz</div>
+                            <div class="grid-item">A=443 Hz</div>
+                            <div class="grid-item">A=444 Hz</div>
+                            <div class="grid-item">A=446 Hz</div>
+                            <div class="grid-item">A=466 Hz</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="feature-item lang-content" id="s6-2-ja">
+                    <div class="feature-title">基準ピッチ (Reference Pitch)</div>
+                    <div class="feature-desc">
+                        アプリ全体のマスターチューニングを 390 Hz 〜 470 Hz の間で1Hz単位で設定可能です。また、以下の12種類のよく使われる周波数がプリセットとして用意されています。
+                        <div class="grid-list">
+                            <div class="grid-item">A=392 Hz</div>
+                            <div class="grid-item">A=415 Hz</div>
+                            <div class="grid-item">A=430 Hz</div>
+                            <div class="grid-item">A=432 Hz</div>
+                            <div class="grid-item">A=438 Hz</div>
+                            <div class="grid-item">A=440 Hz (標準)</div>
+                            <div class="grid-item">A=441 Hz</div>
+                            <div class="grid-item">A=442 Hz</div>
+                            <div class="grid-item">A=443 Hz</div>
+                            <div class="grid-item">A=444 Hz</div>
+                            <div class="grid-item">A=446 Hz</div>
+                            <div class="grid-item">A=466 Hz</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-item lang-content active" id="s6-3-en">
+                    <div class="feature-title">Appearance & Customization</div>
+                    <div class="feature-desc">
+                        <ul class="nested-list">
+                            <li><strong>Theme:</strong> Force the app into Light mode, Dark mode, or have it follow your device's System setting.</li>
+                            <li><strong>Accent Color:</strong> Select from 10 preset colors (Blue, Indigo, Purple, Pink, Red, Orange, Yellow, Green, Teal, Cyan) or tap the Color Picker to choose from 16 million custom colors. The app remembers your 4 most recently used custom colors for quick switching.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="feature-item lang-content" id="s6-3-ja">
+                    <div class="feature-title">外観とテーマカラー (Appearance)</div>
+                    <div class="feature-desc">
+                        <ul class="nested-list">
+                            <li><strong>テーマ (Theme):</strong> アプリを強制的にライトモード、またはダークモードにするか、本体のシステム設定に追従させるかを選択します。</li>
+                            <li><strong>テーマカラー (Accent Color):</strong> UIの強調色を10種類のプリセット（Blue, Indigo, Purple, Pink, Red, Orange, Yellow, Green, Teal, Cyan）から選べるほか、カラーピッカーを使って「1600万色」から自由に独自の色を設定できます。カスタム色は履歴として最新4色まで保存されるため、すぐに以前の色へ戻すことができます。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="feature-item lang-content active" id="s6-4-en">
+                    <div class="feature-title">Languages</div>
+                    <div class="feature-desc">By default, the app matches your iOS system language. You can override this and manually select from 20 supported languages including English, Japanese, German, Korean, French, Spanish, Russian, Chinese, Arabic, Italian, Portuguese, Hindi, Turkish, Indonesian, Dutch, Polish, Thai, Vietnamese, Swedish, and Ukrainian.</div>
+                </div>
+                <div class="feature-item lang-content" id="s6-4-ja">
+                    <div class="feature-title">対応言語 (Language)</div>
+                    <div class="feature-desc">デフォルトではiOSのシステム言語に自動的に追従しますが、手動で強制的に言語を固定することも可能です。本アプリは全20ヶ国語に完全対応しています（英語、日本語、ドイツ語、韓国語、フランス語、スペイン語、ロシア語、中国語、アラビア語、イタリア語、ポルトガル語、ヒンディー語、トルコ語、インドネシア語、オランダ語、ポーランド語、タイ語、ベトナム語、スウェーデン語、ウクライナ語）。</div>
+                </div>
+            </div>
+
+        </div> <!-- /manual-content -->
 
         <a href="../" class="back-link">
             <span id="link-back-en" class="lang-content active">&larr; Back to Home</span>
