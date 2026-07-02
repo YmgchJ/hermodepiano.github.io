@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -81,6 +81,50 @@
             color: var(--primary-color);
         }
 
+        .lang-toggle {
+            display: inline-flex;
+            background: var(--bg-color);
+            padding: 4px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: all 0.2s ease;
+        }
+
+        .lang-btn.active {
+            background: var(--card-bg);
+            color: var(--text-main);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .lang-content {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .lang-content.active {
+            display: block;
+        }
+
+        span.lang-content.active {
+            display: inline;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         @media (max-width: 600px) {
             .container {
                 margin: 20px;
@@ -93,16 +137,59 @@
 
     <div class="container">
         <div class="header">
-            <h1>取扱説明書 / User Manual</h1>
-            <p class="desc">Hermode Pianoの使い方</p>
+            <h1 id="page-title">User Manual</h1>
+            <div class="lang-toggle">
+                <button class="lang-btn" onclick="setLang('ja')" id="btn-ja">日本語</button>
+                <button class="lang-btn active" onclick="setLang('en')" id="btn-en">English</button>
+            </div>
+            
+            <p id="desc-en" class="desc lang-content active">How to use Hermode Piano.</p>
+            <p id="desc-ja" class="desc lang-content">Hermode Pianoの使い方</p>
         </div>
 
         <div class="placeholder-box">
-            <p>ここに取扱説明書の内容を追加してください。<br>(Please add the user manual content here.)</p>
+            <p id="placeholder-en" class="lang-content active">Please add the user manual content here.</p>
+            <p id="placeholder-ja" class="lang-content">ここに取扱説明書の内容を追加してください。</p>
         </div>
 
-        <a href="../" class="back-link">&larr; トップページに戻る / Back to Home</a>
+        <a href="../" class="back-link">
+            <span id="link-back-en" class="lang-content active">&larr; Back to Home</span>
+            <span id="link-back-ja" class="lang-content">&larr; トップページに戻る</span>
+        </a>
     </div>
 
+    <script>
+        function setLang(lang) {
+            document.getElementById('btn-ja').classList.remove('active');
+            document.getElementById('btn-en').classList.remove('active');
+            document.getElementById('btn-' + lang).classList.add('active');
+
+            const allEn = document.querySelectorAll('.lang-content[id$="-en"]');
+            const allJa = document.querySelectorAll('.lang-content[id$="-ja"]');
+
+            if (lang === 'en') {
+                allJa.forEach(el => el.classList.remove('active'));
+                allEn.forEach(el => el.classList.add('active'));
+                
+                document.getElementById('page-title').textContent = 'User Manual';
+                document.title = 'User Manual - Hermode Piano';
+                document.documentElement.lang = 'en';
+            } else {
+                allEn.forEach(el => el.classList.remove('active'));
+                allJa.forEach(el => el.classList.add('active'));
+
+                document.getElementById('page-title').textContent = '取扱説明書';
+                document.title = '取扱説明書 - Hermode Piano';
+                document.documentElement.lang = 'ja';
+            }
+        }
+
+        window.onload = function() {
+            const userLang = navigator.language || navigator.userLanguage;
+            if (userLang.startsWith('ja')) {
+                setLang('ja');
+            }
+        };
+    </script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -63,12 +63,55 @@
             filter: blur(80px);
         }
 
+        .lang-toggle {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            display: inline-flex;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 4px;
+            border-radius: 8px;
+            z-index: 10;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: all 0.2s ease;
+        }
+
+        .lang-btn.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .lang-content {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .lang-content.active {
+            display: block;
+        }
+
+        span.lang-content.active {
+            display: inline;
+        }
+
         .container {
             max-width: 900px;
             width: 100%;
             padding: 40px 20px;
             text-align: center;
             z-index: 1;
+            margin-top: 60px;
         }
 
         .hero {
@@ -79,18 +122,13 @@
         }
 
         .app-icon {
-            width: 100px;
-            height: 100px;
-            background: var(--accent-gradient);
-            border-radius: 24px;
+            width: 120px;
+            height: 120px;
+            border-radius: 28px;
             margin: 0 auto 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             box-shadow: 0 10px 30px rgba(56, 189, 248, 0.3);
-            font-size: 40px;
-            color: white;
-            /* Placeholder for actual icon */
+            object-fit: cover;
+            display: block;
         }
 
         h1 {
@@ -193,57 +231,69 @@
         }
 
         @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @media (max-width: 600px) {
-            h1 {
-                font-size: 40px;
-            }
-            .app-icon {
-                width: 80px;
-                height: 80px;
-                font-size: 32px;
-            }
-            .nav-grid {
-                grid-template-columns: 1fr;
-            }
+            h1 { font-size: 40px; }
+            .app-icon { width: 100px; height: 100px; }
+            .nav-grid { grid-template-columns: 1fr; }
+            .lang-toggle { top: 15px; right: 15px; }
         }
     </style>
 </head>
 <body>
 
+    <div class="lang-toggle">
+        <button class="lang-btn" onclick="setLang('ja')" id="btn-ja">日本語</button>
+        <button class="lang-btn active" onclick="setLang('en')" id="btn-en">English</button>
+    </div>
+
     <div class="container">
         <div class="hero">
-            <div class="app-icon">🎹</div>
+            <img src="AppIcon-iOS-Default-1024x1024@1x.png" alt="Hermode Piano Icon" class="app-icon">
             <h1>Hermode Piano</h1>
-            <p class="subtitle">モバイルデバイスで究極の純正律を体験しよう。<br>Experience the ultimate pure intonation on your mobile device.</p>
+            
+            <p id="subtitle-en" class="subtitle lang-content active">Experience the ultimate pure intonation on your mobile device.</p>
+            <p id="subtitle-ja" class="subtitle lang-content">モバイルデバイスで究極の純正律を体験しよう。</p>
         </div>
 
         <div class="nav-grid">
             <a href="manual/" class="nav-card">
                 <div class="card-icon">📖</div>
-                <div class="card-title">取扱説明書</div>
-                <div class="card-desc">アプリの基本的な使い方や機能について確認できます。</div>
+                <div class="card-title">
+                    <span id="card1-title-en" class="lang-content active">User Manual</span>
+                    <span id="card1-title-ja" class="lang-content">取扱説明書</span>
+                </div>
+                <div class="card-desc">
+                    <span id="card1-desc-en" class="lang-content active">Learn the basic usage and features of the app.</span>
+                    <span id="card1-desc-ja" class="lang-content">アプリの基本的な使い方や機能について確認できます。</span>
+                </div>
             </a>
 
             <a href="privacy/" class="nav-card">
                 <div class="card-icon">🔒</div>
-                <div class="card-title">プライバシーポリシー</div>
-                <div class="card-desc">当アプリにおける情報の取り扱い方針について記載しています。</div>
+                <div class="card-title">
+                    <span id="card2-title-en" class="lang-content active">Privacy Policy</span>
+                    <span id="card2-title-ja" class="lang-content">プライバシーポリシー</span>
+                </div>
+                <div class="card-desc">
+                    <span id="card2-desc-en" class="lang-content active">Information regarding how we handle your data.</span>
+                    <span id="card2-desc-ja" class="lang-content">当アプリにおける情報の取り扱い方針について記載しています。</span>
+                </div>
             </a>
 
             <a href="contact/" class="nav-card">
                 <div class="card-icon">✉️</div>
-                <div class="card-title">お問い合わせ</div>
-                <div class="card-desc">ご質問やご要望などがございましたらこちらからご連絡ください。</div>
+                <div class="card-title">
+                    <span id="card3-title-en" class="lang-content active">Contact Us</span>
+                    <span id="card3-title-ja" class="lang-content">お問い合わせ</span>
+                </div>
+                <div class="card-desc">
+                    <span id="card3-desc-en" class="lang-content active">If you have any questions or requests, please contact us here.</span>
+                    <span id="card3-desc-ja" class="lang-content">ご質問やご要望などがございましたらこちらからご連絡ください。</span>
+                </div>
             </a>
         </div>
 
@@ -252,5 +302,35 @@
         </footer>
     </div>
 
+    <script>
+        function setLang(lang) {
+            // Update buttons
+            document.getElementById('btn-ja').classList.remove('active');
+            document.getElementById('btn-en').classList.remove('active');
+            document.getElementById('btn-' + lang).classList.add('active');
+
+            // Toggle all translatable content
+            const allEn = document.querySelectorAll('.lang-content[id$="-en"]');
+            const allJa = document.querySelectorAll('.lang-content[id$="-ja"]');
+
+            if (lang === 'en') {
+                allJa.forEach(el => el.classList.remove('active'));
+                allEn.forEach(el => el.classList.add('active'));
+                document.documentElement.lang = 'en';
+            } else {
+                allEn.forEach(el => el.classList.remove('active'));
+                allJa.forEach(el => el.classList.add('active'));
+                document.documentElement.lang = 'ja';
+            }
+        }
+
+        // Detect browser language on load
+        window.onload = function() {
+            const userLang = navigator.language || navigator.userLanguage;
+            if (userLang.startsWith('ja')) {
+                setLang('ja');
+            }
+        };
+    </script>
 </body>
 </html>
