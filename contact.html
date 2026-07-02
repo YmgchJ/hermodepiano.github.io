@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,6 +50,52 @@
             font-weight: 700;
             margin-bottom: 10px;
             color: var(--text-main);
+        }
+
+        .lang-toggle {
+            display: inline-flex;
+            background: var(--bg-color);
+            padding: 4px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: all 0.2s ease;
+        }
+
+        .lang-btn.active {
+            background: var(--card-bg);
+            color: var(--text-main);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        /* Span or Div that changes with language */
+        .lang-content {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .lang-content.active {
+            display: block;
+        }
+
+        /* For inline elements like spans inside buttons or links */
+        span.lang-content.active {
+            display: inline;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         p.desc {
@@ -135,13 +181,6 @@
             color: var(--primary-color);
         }
 
-        .note {
-            font-size: 12px;
-            color: #888;
-            margin-top: 15px;
-            text-align: center;
-        }
-
         @media (max-width: 600px) {
             .container {
                 margin: 20px;
@@ -154,8 +193,18 @@
 
     <div class="container">
         <div class="header">
-            <h1>お問い合わせ / Contact</h1>
-            <p class="desc">ご質問やご要望がありましたら、以下のフォームよりお気軽にご連絡ください。<br>Please feel free to contact us using the form below.</p>
+            <h1 id="page-title">Contact Us</h1>
+            <div class="lang-toggle">
+                <button class="lang-btn" onclick="setLang('ja')" id="btn-ja">日本語</button>
+                <button class="lang-btn active" onclick="setLang('en')" id="btn-en">English</button>
+            </div>
+            
+            <div id="desc-en" class="lang-content active">
+                <p class="desc">Please feel free to contact us using the form below if you have any questions or requests.</p>
+            </div>
+            <div id="desc-ja" class="lang-content">
+                <p class="desc">ご質問やご要望がありましたら、以下のフォームよりお気軽にご連絡ください。</p>
+            </div>
         </div>
 
         <!-- 
@@ -165,30 +214,92 @@
         -->
         <form action="https://formspree.io/f/xlgyojyq" method="POST">
             <div class="form-group">
-                <label for="name">お名前 / Name</label>
+                <label for="name">
+                    <span id="label-name-en" class="lang-content active">Name</span>
+                    <span id="label-name-ja" class="lang-content">お名前</span>
+                </label>
                 <input type="text" id="name" name="name" required placeholder="Taro Yamada">
             </div>
 
             <div class="form-group">
-                <label for="email">メールアドレス / Email</label>
+                <label for="email">
+                    <span id="label-email-en" class="lang-content active">Email</span>
+                    <span id="label-email-ja" class="lang-content">メールアドレス</span>
+                </label>
                 <input type="email" id="email" name="email" required placeholder="your@email.com">
             </div>
 
             <div class="form-group">
-                <label for="subject">件名 / Subject</label>
+                <label for="subject">
+                    <span id="label-subject-en" class="lang-content active">Subject</span>
+                    <span id="label-subject-ja" class="lang-content">件名</span>
+                </label>
                 <input type="text" id="subject" name="subject" required placeholder="Inquiry about Hermode Piano">
             </div>
 
             <div class="form-group">
-                <label for="message">お問い合わせ内容 / Message</label>
+                <label for="message">
+                    <span id="label-message-en" class="lang-content active">Message</span>
+                    <span id="label-message-ja" class="lang-content">お問い合わせ内容</span>
+                </label>
                 <textarea id="message" name="message" required placeholder="How can we help you?"></textarea>
             </div>
 
-            <button type="submit">送信する / Send</button>
+            <button type="submit">
+                <span id="btn-submit-en" class="lang-content active">Send Message</span>
+                <span id="btn-submit-ja" class="lang-content">送信する</span>
+            </button>
         </form>
 
-        <a href="index.html" class="back-link">← プライバシーポリシーに戻る / Back to Privacy Policy</a>
+        <a href="index.html" class="back-link">
+            <span id="link-back-en" class="lang-content active">&larr; Back to Privacy Policy</span>
+            <span id="link-back-ja" class="lang-content">&larr; プライバシーポリシーに戻る</span>
+        </a>
     </div>
 
+    <script>
+        function setLang(lang) {
+            // Update buttons
+            document.getElementById('btn-ja').classList.remove('active');
+            document.getElementById('btn-en').classList.remove('active');
+            document.getElementById('btn-' + lang).classList.add('active');
+
+            // Toggle all translatable content
+            const allEn = document.querySelectorAll('.lang-content[id$="-en"]');
+            const allJa = document.querySelectorAll('.lang-content[id$="-ja"]');
+
+            if (lang === 'en') {
+                allJa.forEach(el => el.classList.remove('active'));
+                allEn.forEach(el => el.classList.add('active'));
+                
+                document.getElementById('page-title').textContent = 'Contact Us';
+                document.title = 'Contact - Hermode Piano';
+                document.documentElement.lang = 'en';
+
+                // Update placeholders
+                document.getElementById('subject').placeholder = 'Inquiry about Hermode Piano';
+                document.getElementById('message').placeholder = 'How can we help you?';
+            } else {
+                allEn.forEach(el => el.classList.remove('active'));
+                allJa.forEach(el => el.classList.add('active'));
+
+                document.getElementById('page-title').textContent = 'お問い合わせ';
+                document.title = 'お問い合わせ - Hermode Piano';
+                document.documentElement.lang = 'ja';
+
+                // Update placeholders
+                document.getElementById('subject').placeholder = 'Hermode Pianoに関するお問い合わせ';
+                document.getElementById('message').placeholder = 'お問い合わせ内容をご記入ください';
+            }
+        }
+
+        // Detect browser language on load
+        window.onload = function() {
+            const userLang = navigator.language || navigator.userLanguage;
+            if (userLang.startsWith('ja')) {
+                setLang('ja');
+            }
+        };
+    </script>
 </body>
 </html>
