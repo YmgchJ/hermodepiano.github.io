@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Manual - Hermode Piano</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0A84FF;
+            --primary-hover: #0070E0;
+            --bg-color: #F5F7FA;
+            --card-bg: #FFFFFF;
+            --text-main: #1D1D1F;
+            --text-muted: #515154;
+            --border-color: #E5E5EA;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            background-color: var(--bg-color);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 40px;
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        p.desc {
+            color: var(--text-muted);
+            font-size: 15px;
+            margin-bottom: 25px;
+        }
+
+        .placeholder-box {
+            border: 2px dashed var(--border-color);
+            border-radius: 12px;
+            padding: 60px 20px;
+            text-align: center;
+            color: var(--text-muted);
+            background-color: #FAFAFC;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+            text-align: center;
+            width: 100%;
+        }
+
+        .back-link:hover {
+            color: var(--primary-color);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px;
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>取扱説明書 / User Manual</h1>
+            <p class="desc">Hermode Pianoの使い方</p>
+        </div>
+
+        <div class="placeholder-box">
+            <p>ここに取扱説明書の内容を追加してください。<br>(Please add the user manual content here.)</p>
+        </div>
+
+        <a href="../" class="back-link">&larr; トップページに戻る / Back to Home</a>
+    </div>
+
+</body>
+</html>

@@ -1,19 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - Hermode Piano</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Hermode Piano</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #0A84FF;
-            --primary-hover: #0070E0;
-            --bg-color: #F5F7FA;
-            --card-bg: #FFFFFF;
-            --text-main: #1D1D1F;
-            --text-muted: #515154;
-            --border-color: #E5E5EA;
+            --primary-bg: #0f172a;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --card-hover: rgba(255, 255, 255, 0.1);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --accent-color: #38bdf8;
+            --accent-gradient: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
         }
 
         * {
@@ -24,150 +25,195 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6;
+            background-color: var(--primary-bg);
             color: var(--text-main);
-            background-color: var(--bg-color);
-            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Ambient background glow */
+        body::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            left: -10%;
+            width: 70vw;
+            height: 70vw;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(80px);
+        }
+        
+        body::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            right: -10%;
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, rgba(129, 140, 248, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(80px);
         }
 
         .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 40px;
-            background-color: var(--card-bg);
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            max-width: 900px;
+            width: 100%;
+            padding: 40px 20px;
+            text-align: center;
+            z-index: 1;
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
+        .hero {
+            margin-bottom: 60px;
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .app-icon {
+            width: 100px;
+            height: 100px;
+            background: var(--accent-gradient);
+            border-radius: 24px;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(56, 189, 248, 0.3);
+            font-size: 40px;
+            color: white;
+            /* Placeholder for actual icon */
         }
 
         h1 {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
+            font-size: 56px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 16px;
+            background: linear-gradient(to right, #fff, #cbd5e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .lang-toggle {
-            display: inline-flex;
-            background: var(--bg-color);
-            padding: 4px;
-            border-radius: 8px;
-            margin-top: 15px;
-        }
-
-        .lang-btn {
-            background: transparent;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            color: var(--text-muted);
-            transition: all 0.2s ease;
-        }
-
-        .lang-btn.active {
-            background: var(--card-bg);
-            color: var(--text-main);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
-
-        .policy-content {
-            display: none;
-            animation: fadeIn 0.4s ease;
-        }
-
-        .policy-content.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        h2 {
-            font-size: 22px;
-            color: var(--text-main);
-            margin-top: 35px;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        h3 {
+        p.subtitle {
             font-size: 18px;
-            color: var(--text-main);
-            margin-top: 25px;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-
-        p {
-            margin-bottom: 15px;
             color: var(--text-muted);
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.6;
         }
 
-        a {
-            color: var(--primary-color);
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 50px;
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .nav-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 30px 24px;
             text-decoration: none;
-            transition: color 0.2s ease;
+            color: var(--text-main);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        a:hover {
-            color: var(--primary-hover);
-            text-decoration: underline;
+        .nav-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
-        .contact-box {
-            background: linear-gradient(145deg, #F0F7FF 0%, #E6F2FF 100%);
-            padding: 25px;
-            border-radius: 12px;
-            margin-top: 40px;
-            text-align: center;
-            border: 1px solid #D6E8FF;
+        .nav-card:hover {
+            transform: translateY(-5px);
+            background: var(--card-hover);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
 
-        .contact-box h3 {
-            margin-top: 0;
-            color: var(--primary-color);
+        .nav-card:hover::before {
+            opacity: 1;
         }
 
-        .btn-primary {
-            display: inline-block;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 8px;
+        .card-icon {
+            font-size: 28px;
+            margin-bottom: 16px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card-title {
+            font-size: 18px;
             font-weight: 600;
-            margin-top: 15px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(10, 132, 255, 0.2);
+            margin-bottom: 8px;
+            font-family: 'Outfit', sans-serif;
         }
 
-        .btn-primary:hover {
-            background-color: var(--primary-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(10, 132, 255, 0.3);
-            text-decoration: none;
-            color: white;
-        }
-
-        .effective-date {
-            margin-top: 40px;
+        .card-desc {
             font-size: 14px;
+            color: var(--text-muted);
             text-align: center;
+            line-height: 1.5;
+        }
+
+        footer {
+            margin-top: 80px;
+            font-size: 14px;
+            color: var(--text-muted);
+            opacity: 0;
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @media (max-width: 600px) {
-            .container {
-                margin: 20px;
-                padding: 25px;
+            h1 {
+                font-size: 40px;
+            }
+            .app-icon {
+                width: 80px;
+                height: 80px;
+                font-size: 32px;
+            }
+            .nav-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -175,89 +221,36 @@
 <body>
 
     <div class="container">
-        <div class="header">
-            <h1 id="page-title">Privacy Policy</h1>
-            <div class="lang-toggle">
-                <button class="lang-btn" onclick="setLang('ja')" id="btn-ja">日本語</button>
-                <button class="lang-btn active" onclick="setLang('en')" id="btn-en">English</button>
-            </div>
+        <div class="hero">
+            <div class="app-icon">🎹</div>
+            <h1>Hermode Piano</h1>
+            <p class="subtitle">モバイルデバイスで究極の純正律を体験しよう。<br>Experience the ultimate pure intonation on your mobile device.</p>
         </div>
 
-        <!-- English Section -->
-        <div id="content-en" class="policy-content active">
-            <h2>Information Collection and Use</h2>
-            <p>The Application does not collect or transmit any personally identifiable information about you. We do not require you to provide any personal information to use the Application.</p>
-            <p>The Application does not use any third-party trackers, analytics tools, or advertising networks that collect your personal data.</p>
+        <div class="nav-grid">
+            <a href="manual/" class="nav-card">
+                <div class="card-icon">📖</div>
+                <div class="card-title">取扱説明書</div>
+                <div class="card-desc">アプリの基本的な使い方や機能について確認できます。</div>
+            </a>
 
-            <h2>In-App Purchases (Subscriptions)</h2>
-            <p>The Application offers auto-renewable subscriptions through Apple's App Store. All payment processing and subscription management is handled securely by Apple. The Service Provider does not collect, process, or store your payment information, name, or Apple ID. Please refer to <a href="https://www.apple.com/legal/privacy/" target="_blank">Apple's Privacy Policy</a> for more information on how they handle your data.</p>
+            <a href="privacy/" class="nav-card">
+                <div class="card-icon">🔒</div>
+                <div class="card-title">プライバシーポリシー</div>
+                <div class="card-desc">当アプリにおける情報の取り扱い方針について記載しています。</div>
+            </a>
 
-            <h2>Changes to This Privacy Policy</h2>
-            <p>The Service Provider may update this Privacy Policy from time to time. Thus, you are advised to review this page periodically for any changes. The Service Provider will notify you of any changes by posting the new Privacy Policy on this page.</p>
-            
-            <p class="effective-date">This policy is effective as of <strong>July 1, 2026</strong>.</p>
-
-            <div class="contact-box">
-                <h3>Contact Us</h3>
-                <p>If you have any questions or suggestions about this Privacy Policy, do not hesitate to contact us.</p>
-                <a href="contact.html" class="btn-primary">Go to Inquiry Form</a>
-            </div>
+            <a href="contact/" class="nav-card">
+                <div class="card-icon">✉️</div>
+                <div class="card-title">お問い合わせ</div>
+                <div class="card-desc">ご質問やご要望などがございましたらこちらからご連絡ください。</div>
+            </a>
         </div>
 
-        <!-- Japanese Section -->
-        <div id="content-ja" class="policy-content">
-            <h2>情報の収集と利用</h2>
-            <p>本アプリ（Hermode Piano）は、お客様の個人を特定できる情報（お名前、メールアドレス、連絡先など）を収集または送信することはありません。アプリを利用するために個人情報を提供していただく必要もありません。</p>
-            <p>また、本アプリにはお客様のデータを収集するようなサードパーティのトラッカー、アクセス解析ツール（Google Analyticsなど）、および広告ネットワークは一切組み込まれておりません。</p>
-
-            <h2>アプリ内課金（サブスクリプション）について</h2>
-            <p>本アプリは Apple の App Store を通じて自動更新のサブスクリプションを提供しています。決済処理およびサブスクリプションの管理はすべて Apple によって安全に行われます。開発者（Harmotech）がお客様のクレジットカード情報、本名、Apple IDなどを直接収集・処理・保存することは一切ありません。Appleによるデータの取り扱いについては、<a href="https://www.apple.com/jp/legal/privacy/" target="_blank">Appleのプライバシーポリシー</a>をご参照ください。</p>
-
-            <h2>プライバシーポリシーの変更</h2>
-            <p>開発者は、本プライバシーポリシーを随時更新する場合があります。変更があった場合は、このページに新しいプライバシーポリシーを掲載することでお知らせいたします。定期的にこのページをご確認いただくことをお勧めします。</p>
-            
-            <p class="effective-date">本ポリシーは <strong>2026年7月1日</strong> より有効です。</p>
-
-            <div class="contact-box">
-                <h3>お問い合わせ</h3>
-                <p>本プライバシーポリシーに関するご質問やご提案がありましたら、お気軽にお問い合わせください。</p>
-                <a href="contact.html" class="btn-primary">お問い合わせフォームへ</a>
-            </div>
-        </div>
+        <footer>
+            &copy; 2026 Harmotech. All rights reserved.
+        </footer>
     </div>
 
-    <script>
-        function setLang(lang) {
-            // Update buttons
-            document.getElementById('btn-ja').classList.remove('active');
-            document.getElementById('btn-en').classList.remove('active');
-            document.getElementById('btn-' + lang).classList.add('active');
-
-            // Update content
-            document.getElementById('content-ja').classList.remove('active');
-            document.getElementById('content-en').classList.remove('active');
-            document.getElementById('content-' + lang).classList.add('active');
-
-            // Update title
-            const titleEl = document.getElementById('page-title');
-            if(lang === 'ja') {
-                titleEl.textContent = 'プライバシーポリシー';
-                document.title = 'プライバシーポリシー - Hermode Piano';
-                document.documentElement.lang = 'ja';
-            } else {
-                titleEl.textContent = 'Privacy Policy';
-                document.title = 'Privacy Policy - Hermode Piano';
-                document.documentElement.lang = 'en';
-            }
-        }
-
-        // Detect browser language on load
-        window.onload = function() {
-            const userLang = navigator.language || navigator.userLanguage;
-            if (userLang.startsWith('ja')) {
-                setLang('ja');
-            }
-        };
-    </script>
 </body>
 </html>
