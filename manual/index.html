@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Manual - Hermode Piano</title>
+    <title>User Manual - Harmodus Piano</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -234,8 +234,8 @@
                 <button class="lang-btn active" onclick="setLang('en')" id="btn-en">English</button>
             </div>
             
-            <p id="desc-en" class="desc lang-content active">Comprehensive guide to all features and settings in Hermode Piano.</p>
-            <p id="desc-ja" class="desc lang-content">Hermode Pianoのすべての機能と詳細な設定項目を解説する完全マニュアルです。</p>
+            <p id="desc-en" class="desc lang-content active">Comprehensive guide to all features and settings in Harmodus Piano.</p>
+            <p id="desc-ja" class="desc lang-content">Harmodus Pianoのすべての機能と詳細な設定項目を解説する完全マニュアルです。</p>
         </div>
 
         <div class="manual-content">
@@ -430,7 +430,7 @@
                     <div class="feature-desc">
                         <ul class="nested-list">
                             <li><strong>Equal Temperament:</strong> The standard tuning used on modern pianos. It sounds equally in tune across all keys, but the intervals are slightly compromised.</li>
-                            <li><strong>Just Intonation (Major/Minor):</strong> The defining feature of Hermode Piano. When you play a chord, the app instantly detects its root note and perfectly calculates the mathematical frequency ratios for every note. This creates a purely harmonious, beating-free sound. You can manually toggle between Major and Minor pure intonation based on the context of your song.</li>
+                            <li><strong>Just Intonation (Major/Minor):</strong> The defining feature of Harmodus Piano. When you play a chord, the app instantly detects its root note and perfectly calculates the mathematical frequency ratios for every note. This creates a purely harmonious, beating-free sound. You can manually toggle between Major and Minor pure intonation based on the context of your song.</li>
                         </ul>
                     </div>
                 </div>
@@ -598,7 +598,7 @@
 
                 <div class="feature-item lang-content active" id="s6-1-en">
                     <div class="feature-title">External MIDI Keyboards</div>
-                    <div class="feature-desc">Hermode Piano fully supports external MIDI controllers via Bluetooth or cable. Playing your physical keyboard perfectly triggers the in-app sound engine, the dynamic chord detection, and the Just Intonation tuning algorithms. Active devices are listed in Settings ▸ MIDI.</div>
+                    <div class="feature-desc">Harmodus Piano fully supports external MIDI controllers via Bluetooth or cable. Playing your physical keyboard perfectly triggers the in-app sound engine, the dynamic chord detection, and the Just Intonation tuning algorithms. Active devices are listed in Settings ▸ MIDI.</div>
                 </div>
                 <div class="feature-item lang-content" id="s6-1-ja">
                     <div class="feature-title">MIDIキーボード連携</div>
@@ -697,14 +697,14 @@
                 allEn.forEach(el => el.classList.add('active'));
                 
                 document.getElementById('page-title').textContent = 'User Manual';
-                document.title = 'User Manual - Hermode Piano';
+                document.title = 'User Manual - Harmodus Piano';
                 document.documentElement.lang = 'en';
             } else {
                 allEn.forEach(el => el.classList.remove('active'));
                 allJa.forEach(el => el.classList.add('active'));
 
                 document.getElementById('page-title').textContent = '取扱説明書';
-                document.title = '取扱説明書 - Hermode Piano';
+                document.title = '取扱説明書 - Harmodus Piano';
                 document.documentElement.lang = 'ja';
             }
         }

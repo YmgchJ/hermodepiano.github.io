@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - Hermode Piano</title>
+    <title>Contact - Harmodus Piano</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -234,7 +234,7 @@
                     <span id="label-subject-en" class="lang-content active">Subject</span>
                     <span id="label-subject-ja" class="lang-content">件名</span>
                 </label>
-                <input type="text" id="subject" name="subject" required placeholder="Inquiry about Hermode Piano">
+                <input type="text" id="subject" name="subject" required placeholder="Inquiry about Harmodus Piano">
             </div>
 
             <div class="form-group">
@@ -273,22 +273,22 @@
                 allEn.forEach(el => el.classList.add('active'));
                 
                 document.getElementById('page-title').textContent = 'Contact Us';
-                document.title = 'Contact - Hermode Piano';
+                document.title = 'Contact - Harmodus Piano';
                 document.documentElement.lang = 'en';
 
                 // Update placeholders
-                document.getElementById('subject').placeholder = 'Inquiry about Hermode Piano';
+                document.getElementById('subject').placeholder = 'Inquiry about Harmodus Piano';
                 document.getElementById('message').placeholder = 'How can we help you?';
             } else {
                 allEn.forEach(el => el.classList.remove('active'));
                 allJa.forEach(el => el.classList.add('active'));
 
                 document.getElementById('page-title').textContent = 'お問い合わせ';
-                document.title = 'お問い合わせ - Hermode Piano';
+                document.title = 'お問い合わせ - Harmodus Piano';
                 document.documentElement.lang = 'ja';
 
                 // Update placeholders
-                document.getElementById('subject').placeholder = 'Hermode Pianoに関するお問い合わせ';
+                document.getElementById('subject').placeholder = 'Harmodus Pianoに関するお問い合わせ';
                 document.getElementById('message').placeholder = 'お問い合わせ内容をご記入ください';
             }
         }

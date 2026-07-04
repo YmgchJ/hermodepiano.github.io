@@ -1,7 +1,7 @@
-# Hermode Piano Website
+# Harmodus Piano Website
 
-This repository contains the source code for the official website of **Hermode Piano**, developed by Sonotech. The website is hosted using GitHub Pages and is accessible at:
-[https://hermodepiano.sonotech.net/](https://hermodepiano.sonotech.net/)
+This repository contains the source code for the official website of **Harmodus Piano**, developed by Sonotech. The website is hosted using GitHub Pages and is accessible at:
+[https://harmoduspiano.sonotech.net/](https://harmoduspiano.sonotech.net/)
 
 ## Project Structure
 
